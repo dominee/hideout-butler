@@ -164,6 +164,7 @@ npm run deploy    # needs Cloudflare credentials locally
 | **10021** infinite loop on `_redirects` | `dist/_redirects` from adapter (or `public/_redirects`) | Ensure `npm run build` runs [`strip-redirects.mjs`](scripts/strip-redirects.mjs); redeploy |
 | CI runs `astro add cloudflare` / mutates repo | `wrangler.jsonc` + adapter not pushed yet | Push committed `astro.config.mjs`, `wrangler.jsonc`, `package.json` |
 | Bun install skips `wrangler` | Old `package.json` on remote | Push `package.json` with `wrangler` devDependency |
+| **`Uploading a Pages _worker.js directory as an asset`** | `assets.directory` includes `_worker.js` | [`public/.assetsignore`](public/.assetsignore) + post-build write in [`strip-redirects.mjs`](scripts/strip-redirects.mjs) |
 | Build OK, deploy fails | Wrong deploy command | Use `npx wrangler deploy` after `npm run build` |
 | 404 on screenshots | PNGs not in `public/screenshots/` | Commit assets under `public/screenshots/` |
 | Wrangler prompts interactively in CI | Missing `wrangler.jsonc` in repo | Commit config; pin `wrangler` in `package.json` |
