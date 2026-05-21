@@ -1,5 +1,6 @@
 ---
 import ImageLightbox from "./ImageLightbox.astro";
+import Icon from "./Icon.astro";
 
 const appUrl = "https://app.hideoutbutler.com";
 const githubUrl = "https://github.com/dominee/PoE2-butler";
@@ -49,11 +50,12 @@ const heroScreenshot = {
         place.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
-        <a href={appUrl} class="btn-primary">
+        <a href={appUrl} class="btn-primary gap-2">
+          <Icon name="external" class="h-4 w-4" />
           Open App
-          <span aria-hidden="true" class="ml-1.5">→</span>
         </a>
-        <a href={githubUrl} class="btn-ghost" target="_blank" rel="noopener noreferrer">
+        <a href={githubUrl} class="btn-ghost gap-2" target="_blank" rel="noopener noreferrer">
+          <Icon name="github" class="h-4 w-4" />
           View on GitHub
         </a>
       </div>

@@ -1,4 +1,6 @@
 ---
+import Icon from "./Icon.astro";
+
 const appUrl = "https://app.hideoutbutler.com";
 const githubUrl = "https://github.com/dominee/PoE2-butler";
 
@@ -61,7 +63,10 @@ const navLinks = [
             clip-rule="evenodd"></path>
         </svg>
       </a>
-      <a href={appUrl} class="btn-primary text-xs sm:text-sm">Open App</a>
+      <a href={appUrl} class="btn-primary gap-2 text-xs sm:text-sm">
+        <Icon name="external" class="h-4 w-4" />
+        Open App
+      </a>
     </div>
   </nav>
 </header>

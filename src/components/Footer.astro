@@ -1,4 +1,6 @@
 ---
+import Icon from "./Icon.astro";
+
 const appUrl = "https://app.hideoutbutler.com";
 const githubUrl = "https://github.com/dominee/PoE2-butler";
 const year = new Date().getFullYear();
@@ -18,22 +20,25 @@ const year = new Date().getFullYear();
       >
         <a
           href={appUrl}
-          class="text-parchment-200 transition hover:text-ember-400"
+          class="inline-flex items-center gap-1.5 text-parchment-200 transition hover:text-ember-400"
         >
+          <Icon name="external" class="h-3.5 w-3.5" />
           Open App
         </a>
         <a
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-parchment-200 transition hover:text-ember-400"
+          class="inline-flex items-center gap-1.5 text-parchment-200 transition hover:text-ember-400"
         >
+          <Icon name="github" class="h-3.5 w-3.5" />
           GitHub
         </a>
         <a
           href="https://hideoutbutler.com"
-          class="text-parchment-200 transition hover:text-ember-400"
+          class="inline-flex items-center gap-1.5 text-parchment-200 transition hover:text-ember-400"
         >
+          <Icon name="globe" class="h-3.5 w-3.5" />
           hideoutbutler.com
         </a>
       </nav>
