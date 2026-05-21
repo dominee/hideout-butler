@@ -1,0 +1,55 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "../lib/icons";
+
+const useCases: { icon: IconName; title: string; body: string }[] = [
+  {
+    icon: "coin",
+    title: "Price a drop or dump tab",
+    body: "Highlight valuable items above your chaos threshold and queue bulk pricing with Apprise after a refresh.",
+  },
+  {
+    icon: "chart",
+    title: "Decide if a rare is worth keeping",
+    body: "Read item score, per-mod tier labels, and roll rating bars before you stash or vendor a piece.",
+  },
+  {
+    icon: "share",
+    title: "Share in Discord",
+    body: "Export a detail PNG or copy a public share link — no screenshot cropping in-game required.",
+  },
+  {
+    icon: "search",
+    title: "Find upgrades on trade",
+    body: "One-click exact, upgrade, or weighted trade searches with tolerance you control.",
+  },
+];
+---
+
+<section id="use-cases" class="section-divider border-b border-ink-800 bg-ink-900 py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="section-heading">Use cases</h2>
+      <p class="section-subheading">
+        Built for players who care about rolls, prices, and sharing gear outside
+        the game client.
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 sm:grid-cols-2">
+      {
+        useCases.map((item) => (
+          <li class="card-pane p-6">
+            <div class="mb-3 inline-flex rounded-lg bg-ember-500/10 p-2 text-ember-400">
+              <Icon name={item.icon} class="h-5 w-5" />
+            </div>
+            <h3 class="font-semibold text-parchment-50">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-parchment-200/85">
+              {item.body}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

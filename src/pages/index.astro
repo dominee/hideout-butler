@@ -2,23 +2,35 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
+import StatusBanner from "../components/StatusBanner.astro";
+import HowItWorks from "../components/HowItWorks.astro";
 import Features from "../components/Features.astro";
 import Screenshots from "../components/Screenshots.astro";
+import UseCases from "../components/UseCases.astro";
+import Privacy from "../components/Privacy.astro";
 import Limitations from "../components/Limitations.astro";
 import Roadmap from "../components/Roadmap.astro";
 import FAQ from "../components/FAQ.astro";
+import CtaBand from "../components/CtaBand.astro";
 import Footer from "../components/Footer.astro";
+import MobileStickyBar from "../components/MobileStickyBar.astro";
 ---
 
 <Layout>
   <Nav />
-  <main>
+  <main id="main-content">
     <Hero />
+    <StatusBanner />
+    <HowItWorks />
     <Features />
     <Screenshots />
+    <UseCases />
+    <Privacy />
     <Limitations />
     <Roadmap />
     <FAQ />
+    <CtaBand />
   </main>
   <Footer />
+  <MobileStickyBar />
 </Layout>

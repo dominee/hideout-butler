@@ -1,4 +1,6 @@
 ---
+import Icon from "./Icon.astro";
+
 const faqs = [
   {
     question: "Is Hideout Butler free?",
@@ -6,24 +8,44 @@ const faqs = [
       "Yes. Hideout Butler is free to use. You sign in with your GGG account via OAuth2 — no separate account or password is required for the app itself.",
   },
   {
+    question: "Is this safe? Will I get banned?",
+    answer:
+      "The app uses the official GGG OAuth2 flow and server-side API calls only — the same class of integration GGG documents for third-party tools. Your token is never exposed to the browser. Using authorized API access is not the same as botting or client modification.",
+  },
+  {
     question: "Do I need a Path of Exile 2 account?",
     answer:
-      "Yes. You log in with Grinding Gear Games OAuth. The app reads your character and (when available) stash data through the official GGG API.",
+      "Yes. You log in with Grinding Gear Games OAuth. The app reads character data through the official GGG API using scopes you approve at login.",
+  },
+  {
+    question: "Is my data live?",
+    answer:
+      "No — data is snapshot-based. Use Refresh to pull the latest character (and stash when available) from GGG. Pricing refined via the trade API runs only when you explicitly request it, not automatically on every item open.",
   },
   {
     question: "Why can't I see my stash tabs?",
     answer:
-      "GGG has not yet released a PoE2 stash OAuth scope. Until they do, live stash data from the real API is unavailable. Character gear and other features work today; stash browsing is fully functional in demo/development mode.",
+      "GGG has not yet released a PoE2 stash OAuth scope. Until they do, live stash data from the real API is unavailable in production. Stash browsing is fully implemented and works in development and demo mode.",
   },
   {
     question: "Where does character gear data come from?",
     answer:
-      "After OAuth login, production character data comes from the official GGG API. In development and demo environments, character snapshots are currently sourced from public poe.ninja character exports when live GGG data is limited or for showcase accounts.",
+      "In production, character gear comes from the official GGG API after OAuth login (character-related scopes). Development and demo environments may use public poe.ninja character exports for showcase accounts when exercising the UI without live GGG data.",
   },
   {
     question: "Where does pricing data come from?",
     answer:
-      "Bulk estimates come from poe.ninja. For refined numbers on individual items, the app can query the public GGG PoE2 trade JSON API on demand (after you explicitly request a refresh). All prices are labelled as indicative estimates.",
+      "Bulk estimates come from poe.ninja. For refined numbers on individual items, the app can query the public GGG PoE2 trade JSON API on demand after you explicitly refresh pricing. All prices are labelled as indicative estimates.",
+  },
+  {
+    question: "Are public share links private?",
+    answer:
+      "No. Share URLs are world-readable by design — anyone with the link can view that item snapshot without logging in. Create links only for items you are comfortable showing publicly. You can revoke a link anytime; creation is rate-limited.",
+  },
+  {
+    question: "What OAuth scopes are used?",
+    answer:
+      "Hideout Butler requests only the GGG OAuth scopes needed for character and account data you approve at login. The exact list is shown on the GGG authorization screen when you click Sign in — we do not request scopes beyond what the app uses.",
   },
   {
     question: "Is my OAuth token stored securely?",
@@ -33,7 +55,7 @@ const faqs = [
 ];
 ---
 
-<section id="faq" class="border-b border-ink-800 bg-ink-900 py-16 sm:py-24">
+<section id="faq" class="section-divider border-b border-ink-800 bg-ink-900 py-16 sm:py-24">
   <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
     <div class="text-center">
       <h2 class="section-heading">FAQ</h2>
@@ -48,14 +70,12 @@ const faqs = [
           <details class="group card-pane overflow-hidden">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-4 font-medium text-parchment-50 transition hover:text-ember-400 [&::-webkit-details-marker]:hidden">
               {faq.question}
-              <span
-                class="shrink-0 text-ember-400 transition group-open:rotate-180"
-                aria-hidden="true"
-              >
-                ▼
-              </span>
+              <Icon
+                name="chevron-down"
+                class="h-4 w-4 shrink-0 text-ember-400 transition group-open:rotate-180"
+              />
             </summary>
-            <div class="border-t border-ink-600/80 px-6 py-4 text-sm leading-relaxed text-parchment-200/80">
+            <div class="border-t border-ink-600/80 px-6 py-4 text-sm leading-relaxed text-parchment-200/85">
               {faq.answer}
             </div>
           </details>

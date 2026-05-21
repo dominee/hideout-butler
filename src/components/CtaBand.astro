@@ -1,0 +1,31 @@
+---
+import Icon from "./Icon.astro";
+
+const appUrl = "https://app.hideoutbutler.com";
+const githubUrl = "https://github.com/dominee/PoE2-butler";
+---
+
+<section
+  class="border-b border-ink-800 bg-gradient-to-b from-ink-900 to-ink-950 py-16 sm:py-20"
+  aria-labelledby="cta-heading"
+>
+  <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+    <h2 id="cta-heading" class="font-display text-3xl font-semibold text-parchment-50 sm:text-4xl">
+      Ready to inspect your gear?
+    </h2>
+    <p class="section-lead mx-auto mt-4 text-parchment-200/85">
+      Free to use. Sign in with GGG OAuth and refresh when you want an updated
+      snapshot.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a href={appUrl} class="btn-primary gap-2">
+        <Icon name="external" class="h-4 w-4" />
+        Open App
+      </a>
+      <a href={githubUrl} class="btn-ghost gap-2" target="_blank" rel="noopener noreferrer">
+        <Icon name="github" class="h-4 w-4" />
+        View on GitHub
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+---
+import Icon from "./Icon.astro";
+
+const appUrl = "https://app.hideoutbutler.com";
+---
+
+<div
+  id="mobile-sticky-cta"
+  class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-ink-700 bg-ink-950/95 p-3 backdrop-blur-md transition-transform duration-300 md:hidden"
+  hidden
+  role="region"
+  aria-label="Open app"
+>
+  <div class="mx-auto flex max-w-lg items-center gap-3">
+    <a href={appUrl} class="btn-primary flex-1 gap-2 py-2 text-sm">
+      <Icon name="external" class="h-4 w-4" />
+      Open App
+    </a>
+    <button
+      type="button"
+      id="mobile-sticky-dismiss"
+      class="rounded-md border border-ink-600 px-3 py-2 text-sm text-parchment-200/90"
+      aria-label="Dismiss"
+    >
+      ✕
+    </button>
+  </div>
+</div>
+
+<script>
+  function initMobileStickyCta() {
+    const bar = document.getElementById("mobile-sticky-cta");
+    const dismiss = document.getElementById("mobile-sticky-dismiss");
+    if (!bar || !dismiss) return;
+    if (bar.dataset.bound === "true") return;
+    bar.dataset.bound = "true";
+
+    const storageKey = "hideout-butler-sticky-cta-dismissed";
+
+    const show = () => {
+      if (window.matchMedia("(min-width: 768px)").matches) return;
+      if (sessionStorage.getItem(storageKey) === "1") return;
+      bar.hidden = false;
+      requestAnimationFrame(() => {
+        bar.classList.remove("translate-y-full");
+      });
+    };
+
+    dismiss.addEventListener("click", () => {
+      sessionStorage.setItem(storageKey, "1");
+      bar.classList.add("translate-y-full");
+      window.setTimeout(() => {
+        bar.hidden = true;
+      }, 300);
+    });
+
+    window.addEventListener("scroll", show, { once: true, passive: true });
+    show();
+  }
+
+  initMobileStickyCta();
+  document.addEventListener("astro:page-load", initMobileStickyCta);
+</script>

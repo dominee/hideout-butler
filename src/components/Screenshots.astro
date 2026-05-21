@@ -4,11 +4,13 @@ import type { IconName } from "../lib/icons";
 
 type Callout = {
   title: string;
+  summary?: string;
   body: string;
 };
 
 type MenuFeature = {
   title: string;
+  summary?: string;
   body: string;
 };
 
@@ -19,6 +21,7 @@ type ShowcaseSlide = {
   src: string;
   alt: string;
   kind: "annotated" | "menu" | "stash";
+  tabAccent?: string;
   intro?: string;
   callouts?: Callout[];
   features?: MenuFeature[];
@@ -26,37 +29,75 @@ type ShowcaseSlide = {
 
 const slides: ShowcaseSlide[] = [
   {
+    id: "main-ui",
+    label: "Main UI",
+    icon: "monitor",
+    src: "/screenshots/Screenshot.png",
+    alt: "Hideout Butler main screen showing character gear, stat summary, and item detail pane",
+    kind: "annotated",
+    intro: "The primary app layout — character gear, stats, activity, and item detail.",
+    callouts: [
+      {
+        title: "Activity log",
+        summary: "Track what changed since your last refresh.",
+        body: "Collapsible sidebar lists new, changed, and removed items across stash tabs and equipped gear. Refresh once to establish a baseline, then spot diffs on the next pull.",
+      },
+      {
+        title: "Stat summary",
+        summary: "Equipment stats with T1 quality bars per section.",
+        body: "Life, resistances, attributes, and other grouped stats with brief and expanded views — see how well your current gear rolls without adding each piece manually.",
+      },
+      {
+        title: "Character gear grid",
+        summary: "Doll or table view of equipped items.",
+        body: "Switch layouts, select any piece, and open the detail pane. League selector and Refresh in the header keep the snapshot aligned with your chosen league.",
+      },
+      {
+        title: "Item detail pane",
+        summary: "Full mod breakdown, pricing, and actions.",
+        body: "Trade search, share links, image export, and roll quality bars live here — the hub for inspecting a single item in depth.",
+      },
+    ],
+  },
+  {
     id: "rare-detail",
     label: "Rare item detail",
     icon: "chart",
     src: "/screenshots/item-6ccf44f0-detail.png",
     alt: "Rare weapon item detail export showing mod tiers and roll quality bars",
     kind: "annotated",
-    intro: "Sections top to bottom as shown in the detail export PNG.",
+    tabAccent: "border-l-rarity-rare",
+    intro: "Detail export PNG — sections top to bottom as shown.",
     callouts: [
       {
         title: "Detail image export",
-        body: "This screenshot is the client-generated PNG from Image (detail) — a self-contained share card you can post to Discord, forums, or trade chats. It captures the item name, rarity, pricing, score, socketed runes, and full mod breakdown without requiring viewers to open the app.",
+        summary: "Shareable PNG from Image (detail).",
+        body: "Self-contained card for Discord, forums, or trade chats — name, rarity, pricing, score, runes, and full mod breakdown without requiring viewers to open the app.",
       },
       {
         title: "Pricing",
-        body: "Hybrid market estimate in divine and exalted orbs. Bulk values come from poe.ninja; you can request a refined snapshot from the GGG trade API on demand. Numbers are labelled indicative — useful for comparing drops, not a live market guarantee.",
+        summary: "Hybrid estimate in div / ex.",
+        body: "Bulk values from poe.ninja; refined trade API snapshot on explicit refresh. Labelled indicative — useful for comparing drops, not a live market guarantee.",
       },
       {
         title: "Item score",
-        body: "Aggregate roll quality across all rated explicit mods, expressed as a percentage bar. Here the crossbow scores 116% — a quick read on whether the item is merely usable or genuinely well rolled before you dive into individual mods.",
+        summary: "Aggregate roll quality (here 116%).",
+        body: "Quick read on whether the item is merely usable or genuinely well rolled before you dive into individual mods.",
       },
       {
         title: "Runes & cores",
-        body: "Every socketed rune and soul core is parsed and listed with its effect text for martial weapons, wands, armour, or boots as applicable. You see exactly what each socket contributes without hovering in-game or cross-referencing wiki pages.",
+        summary: "Every socket parsed with effect text.",
+        body: "See what each rune and soul core contributes for martial weapons, wands, armour, or boots — no in-game hover or wiki cross-reference needed.",
       },
       {
         title: "Prefix rolls & spreads",
-        body: "Each prefix shows its tier label (e.g. T2 of 8), the rolled value, the numeric range for that tier, the T1 cap, required item level, and a roll rating bar with percentage. Compare 163% phys at 91% of range versus +5 attack skills pinned at 100% — spot which mods carry the item.",
+        summary: "Tier, range, T1 cap, and roll rating per prefix.",
+        body: "Compare 163% phys at 91% of range versus +5 attack skills at 100% — spot which mods carry the item.",
       },
       {
         title: "Suffix rolls & spreads",
-        body: "Suffixes use the same tier, range, and roll-rating breakdown as prefixes. Life leech at T1/4 with a 94% roll is easy to scan; a 100% onslaught suffix tells you that mod is perfect. Together with prefixes, this is the full stat spread picture for trade or keep decisions.",
+        summary: "Same breakdown for suffix mods.",
+        body: "Life leech at T1/4 with a 94% roll; 100% onslaught suffix — the full stat spread picture for trade or keep decisions.",
       },
     ],
   },
@@ -67,27 +108,33 @@ const slides: ShowcaseSlide[] = [
     src: "/screenshots/item-74538585-detail.png",
     alt: "Unique item detail export with flavour text and explicit mods",
     kind: "annotated",
-    intro: "Sections top to bottom as shown in the unique item detail export.",
+    tabAccent: "border-l-rarity-unique",
+    intro: "Unique export with flavour text, implicit spreads, and variable roll ratings.",
     callouts: [
       {
         title: "Pricing",
-        body: "Estimated value for uniques uses the same hybrid pricing pipeline — shown inline next to the item header.",
+        summary: "Hybrid estimate inline with the header.",
+        body: "Same pipeline as rares — bulk poe.ninja plus optional refined trade numbers when you request a refresh.",
       },
       {
         title: "Item quality",
-        body: "Overall quality score for variable unique rolls, summarised as a single percentage bar across rated mods.",
+        summary: "Overall score across rated unique mods.",
+        body: "Single percentage bar summarising variable rolls — spot a well-rolled Headhunter without checking each stat manually.",
       },
       {
         title: "Implicit roll spreads",
-        body: "Implicit mods show their possible range (e.g. 20–30% stun threshold) plus a type-quality bar rating the current roll within that spread.",
+        summary: "Range and type-quality per implicit.",
+        body: "e.g. 20–30% stun threshold with a bar showing where the current roll sits — implicits are rated too, not just explicits.",
       },
       {
         title: "Unique mod rolls",
-        body: "Variable unique stats (+Life, +Str, +Dex, etc.) display min–max spreads and per-mod type-quality ratings — spot a well-rolled Headhunter at a glance.",
+        summary: "Min–max spreads on variable uniques.",
+        body: "+Life, +Str, +Dex and similar stats show possible ranges and per-mod type-quality — compare two Headhunters at a glance.",
       },
       {
         title: "Fixed unique effect",
-        body: "Static unique text (non-variable) is shown verbatim below the rated mods — the signature modifier that defines the item.",
+        summary: "Signature modifier verbatim.",
+        body: "Static unique text below rated mods — the defining modifier that does not roll.",
       },
     ],
   },
@@ -98,35 +145,42 @@ const slides: ShowcaseSlide[] = [
     src: "/screenshots/item_detail_menu.png",
     alt: "Item detail action menu with share, export, trade search, and upgrade buttons",
     kind: "menu",
-    intro: "Tools available from the item detail pane — top to bottom as shown in the screenshot.",
+    intro: "Tools in the item detail pane — top to bottom as shown.",
     features: [
       {
         title: "Create & copy link",
-        body: "Generate a public read-only page for this item snapshot — no GGG account or app login required for viewers.",
+        summary: "Public read-only item page.",
+        body: "World-readable URL — no GGG account required for viewers. Create only for items you are comfortable showing; revoke anytime.",
       },
       {
         title: "Image / Image (detail)",
-        body: "Export Discord-ready PNGs: a compact card or a full detail layout with tiers, ranges, and roll bars.",
+        summary: "Discord-ready PNG exports.",
+        body: "Compact card or full detail layout with tiers, ranges, and roll bars.",
       },
       {
         title: "Copy PoE2 item text",
-        body: "Copy the item as PoE2-style clipboard text for pasting into trade tools or build planners.",
+        summary: "Clipboard block string.",
+        body: "Paste into build planners or trade tools in native PoE2 text format.",
       },
       {
         title: "Exact tolerance + Save",
-        body: "Set the percentage tolerance used for exact-match trade searches; saved per user for later searches.",
+        summary: "Per-user trade search tolerance.",
+        body: "Set the percentage band for exact-match searches; persisted for later use.",
       },
       {
         title: "Trade Search",
-        body: "Submit a trade-site search from the item's stats using your saved tolerance — opens results on the official PoE2 trade site.",
+        summary: "Opens official PoE2 trade with your stats.",
+        body: "Submits a search from the item using your saved tolerance — search JSON copied to clipboard.",
       },
       {
         title: "Upgrade",
-        body: "Search for upgrades with min-floor rolls at ~95% of your current values on each stat.",
+        summary: "Min-floor upgrade search (~95% of current rolls).",
+        body: "Find strictly better versions on the same base with floor values per stat.",
       },
       {
         title: "Upgrade (weighted)",
-        body: "Prioritise your highest-tier mods when searching for upgrades. Falls back to regular upgrade when GGG rejects weighted queries.",
+        summary: "Prioritises highest-tier mods.",
+        body: "Falls back to regular upgrade when GGG rejects weighted queries from server-side callers.",
       },
     ],
   },
@@ -137,29 +191,33 @@ const slides: ShowcaseSlide[] = [
     src: "/screenshots/stash.png",
     alt: "Stash tab icon grid with valuable item highlights",
     kind: "stash",
-    intro: "Stash tab features as shown in the icon grid view.",
+    intro: "Stash tab features in icon grid view (demo/dev until GGG stash scope ships).",
     callouts: [
       {
         title: "Icon grid layout",
-        body: "Items render in a fixed grid using PoE CDN icons, respecting each item's cell footprint (1×1 rings up to 2×4 weapons).",
+        summary: "PoE CDN icons with correct cell footprints.",
+        body: "1×1 rings up to 2×4 weapons — fixed grid matching in-game tab geometry.",
       },
       {
         title: "Valuable highlights",
-        body: "Items at or above your chaos threshold get a gold outline so high-value drops stand out in a full tab.",
+        summary: "Gold outline above your chaos threshold.",
+        body: "High-value drops stand out in a full tab without opening each cell.",
       },
       {
         title: "Activity indicators",
-        body: "New items show a green dot; changed items an amber dot — driven by the activity log diff since your last refresh.",
+        summary: "Green = new, amber = changed.",
+        body: "Driven by the activity log diff since your last refresh.",
       },
       {
         title: "Grid & table modes",
-        body: "Switch between icon grid and sortable table views; filter and layout preferences persist per tab.",
+        summary: "Switch views per tab.",
+        body: "Sortable table alternative with filter and layout preferences that persist.",
       },
     ],
   },
 ];
 
-function slideItems(slide: ShowcaseSlide): Callout[] {
+function slideItems(slide: ShowcaseSlide): (Callout | MenuFeature)[] {
   return slide.features ?? slide.callouts ?? [];
 }
 
@@ -169,7 +227,7 @@ function slideHeading(slide: ShowcaseSlide): string {
 }
 ---
 
-<section id="screenshots" class="border-b border-ink-800 bg-ink-950 py-16 sm:py-24">
+<section id="screenshots" class="section-divider border-b border-ink-800 bg-ink-950 py-16 sm:py-24">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl">
       <h2 class="section-heading">Screenshots</h2>
@@ -194,7 +252,10 @@ function slideHeading(slide: ShowcaseSlide): string {
               aria-selected={index === 0 ? "true" : "false"}
               aria-controls={`panel-${slide.id}`}
               data-screenshot-tab={slide.id}
-              class="inline-flex items-center gap-2 rounded-md border border-ink-600 bg-ink-900/60 px-3 py-2 text-sm font-medium text-parchment-200/90 transition hover:border-ember-500/40 hover:text-ember-400 aria-selected:border-ember-500/50 aria-selected:bg-ember-500/10 aria-selected:text-ember-400"
+              class:list={[
+                "inline-flex items-center gap-2 rounded-md border border-l-4 border-ink-600 bg-ink-900/60 px-3 py-2 text-sm font-medium text-parchment-200/90 transition hover:border-ember-500/40 hover:text-ember-400 aria-selected:border-ember-500/50 aria-selected:bg-ember-500/10 aria-selected:text-ember-400",
+                slide.tabAccent,
+              ]}
             >
               <Icon name={slide.icon} class="h-4 w-4 shrink-0" />
               {slide.label}
@@ -211,6 +272,7 @@ function slideHeading(slide: ShowcaseSlide): string {
               role="tabpanel"
               aria-labelledby={`tab-${slide.id}`}
               data-screenshot-panel={slide.id}
+              tabindex={index === 0 ? 0 : -1}
               hidden={index !== 0}
             >
               <div class="card-pane grid gap-8 overflow-hidden p-4 sm:p-6 lg:grid-cols-[minmax(0,380px)_1fr] lg:items-start lg:gap-10">
@@ -230,15 +292,20 @@ function slideHeading(slide: ShowcaseSlide): string {
                     {slideHeading(slide)}
                   </h3>
                   {slide.intro && (
-                    <p class="mt-2 text-sm text-parchment-200/75">{slide.intro}</p>
+                    <p class="mt-2 text-sm text-parchment-200/85">{slide.intro}</p>
                   )}
                   <ul class="mt-6 space-y-5">
                     {slideItems(slide).map((item) => (
-                      <li class="screenshot-callout border-l-2 border-ember-500/50 pl-4">
+                      <li class="border-l-2 border-ember-500/50 pl-4">
                         <h4 class="text-sm font-semibold text-ember-400">
                           {item.title}
                         </h4>
-                        <p class="mt-1 text-sm leading-relaxed text-parchment-200/80">
+                        {"summary" in item && item.summary && (
+                          <p class="mt-1 text-sm font-medium text-parchment-100/90">
+                            {item.summary}
+                          </p>
+                        )}
+                        <p class="mt-1 text-sm leading-relaxed text-parchment-200/85">
                           {item.body}
                         </p>
                       </li>
@@ -264,7 +331,7 @@ function slideHeading(slide: ShowcaseSlide): string {
       const tabs = root.querySelectorAll("[data-screenshot-tab]");
       const panels = root.querySelectorAll("[data-screenshot-panel]");
 
-      const activate = (id: string) => {
+      const activate = (id: string, focusPanel = false) => {
         tabs.forEach((tab) => {
           const selected = tab.getAttribute("data-screenshot-tab") === id;
           tab.setAttribute("aria-selected", selected ? "true" : "false");
@@ -273,13 +340,17 @@ function slideHeading(slide: ShowcaseSlide): string {
         panels.forEach((panel) => {
           const active = panel.getAttribute("data-screenshot-panel") === id;
           panel.hidden = !active;
+          panel.setAttribute("tabindex", active ? "0" : "-1");
+          if (active && focusPanel && panel instanceof HTMLElement) {
+            panel.focus({ preventScroll: true });
+          }
         });
       };
 
       tabs.forEach((tab) => {
         tab.addEventListener("click", () => {
           const id = tab.getAttribute("data-screenshot-tab");
-          if (id) activate(id);
+          if (id) activate(id, true);
         });
       });
     });
@@ -288,3 +359,15 @@ function slideHeading(slide: ShowcaseSlide): string {
   initScreenshotShowcase();
   document.addEventListener("astro:page-load", initScreenshotShowcase);
 </script>
+
+<style>
+  [role="tabpanel"]:focus {
+    outline: none;
+  }
+
+  [role="tabpanel"]:focus-visible {
+    outline: 2px solid rgba(200, 160, 64, 0.5);
+    outline-offset: 4px;
+    border-radius: 0.5rem;
+  }
+</style>

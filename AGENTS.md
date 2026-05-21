@@ -16,13 +16,19 @@ Static marketing site for **PoE2 Hideout Butler** (main app: [PoE2-butler](https
 - Tailwind CSS with design tokens mirrored from the main app (`ink`, `ember`, `parchment`, `rarity`)
 - Fonts: Cinzel (display), Inter (body)
 
-## Layout
+## Page structure
 
-Single page (`src/pages/index.astro`) with sections: Nav, Hero, Features, Screenshots, Limitations, Roadmap, FAQ, Footer.
+Single page ([`src/pages/index.astro`](src/pages/index.astro)) section order:
+
+1. Nav (sticky; favicon + links including How it works, Privacy)
+2. Hero + StatusBanner (availability pills)
+3. HowItWorks → Features (grouped: Inspect / Trade / Share / Track) → Screenshots → UseCases
+4. Privacy → Limitations → Roadmap → FAQ → CtaBand
+5. Footer + MobileStickyBar
 
 ## Assets
 
-Source screenshots live in `screenshots/` (may be local-only). Deployed copies are in `public/screenshots/` (committed for Cloudflare Pages).
+Source screenshots in `screenshots/`; deployed copies in `public/screenshots/`.
 
 ## Mandatory copy
 
@@ -30,23 +36,26 @@ Footer must include verbatim GGG disclaimer:
 
 > This product isn't affiliated with or endorsed by Grinding Gear Games in any way.
 
+## Messaging rules
+
+- Do **not** imply live prod stash — GGG PoE2 stash OAuth scope is not available yet.
+- Stash feature card carries “Blocked on GGG API” badge.
+- Data is snapshot-based (manual Refresh); pricing refined on explicit user action.
+- Public share links are world-readable — warn in Privacy and FAQ.
+
 ## Build & test
 
 **Local (no npm on host):** use Docker.
 
 ```bash
 docker compose up --build    # preview at http://localhost:8080
-docker build -t hideout-butler-site .   # build-only verification
+docker build -t hideout-butler-site .
 ```
 
-Multi-stage `Dockerfile`: Node 22 Alpine builds → nginx 1.27 Alpine serves `dist/`.
+**Cloudflare Pages:** Node 22, `npm run build`, output `dist/`, `NODE_VERSION=22`.
 
-**Cloudflare Pages:** Node 22 in CI runs `npm run build`; output `dist/`. Set `NODE_VERSION=22`.
+See [README.md](README.md).
 
-See [README.md](README.md) for operator runbook.
+## SEO
 
-## Key limitations to communicate
-
-- GGG has no PoE2 stash OAuth scope yet — live stash from real API is blocked upstream.
-- Pricing is indicative (poe.ninja + optional GGG trade API).
-- Not affiliated with GGG.
+[`Layout.astro`](src/layouts/Layout.astro): canonical, Open Graph, Twitter cards, JSON-LD SoftwareApplication.

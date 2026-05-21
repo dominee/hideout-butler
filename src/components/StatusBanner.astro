@@ -1,0 +1,28 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<section
+  id="status"
+  class="border-b border-ink-800 bg-ink-900 py-4"
+  aria-label="Product availability status"
+>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+      <span class="status-pill-available">
+        <Icon name="check" class="h-3.5 w-3.5" />
+        Available now: character gear, item analysis, trade links, sharing
+      </span>
+      <span class="status-pill-waiting">
+        <Icon name="alert" class="h-3.5 w-3.5" />
+        Waiting on GGG: live PoE2 stash OAuth scope
+      </span>
+      <a
+        href="#limitations"
+        class="text-sm text-parchment-200/85 underline decoration-ember-500/40 underline-offset-2 transition hover:text-ember-400"
+      >
+        Read current limitations
+      </a>
+    </div>
+  </div>
+</section>

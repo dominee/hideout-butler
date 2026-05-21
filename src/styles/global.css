@@ -7,6 +7,12 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-ink-950 text-parchment-100 antialiased;
   }
@@ -18,7 +24,11 @@
   }
 
   .section-subheading {
-    @apply mt-3 max-w-2xl text-base text-parchment-200/80 sm:text-lg;
+    @apply section-lead mt-3 text-base text-parchment-200/85 sm:text-lg;
+  }
+
+  .section-lead {
+    @apply max-w-[65ch] leading-relaxed;
   }
 
   .btn-primary {
@@ -31,5 +41,21 @@
 
   .card-pane {
     @apply rounded-lg border border-ink-600/80 bg-ink-800/80 shadow-pane;
+  }
+
+  .status-pill-available {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300;
+  }
+
+  .status-pill-waiting {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-300;
+  }
+
+  .feature-status-blocked {
+    @apply rounded-full border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-300;
+  }
+
+  .section-divider {
+    @apply border-t border-ink-800 bg-gradient-to-b from-ink-800/20 to-transparent;
   }
 }

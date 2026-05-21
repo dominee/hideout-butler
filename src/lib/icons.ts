@@ -7,7 +7,20 @@ export type IconName =
   | "chart"
   | "star"
   | "menu"
-  | "grid";
+  | "grid"
+  | "shield"
+  | "users"
+  | "search"
+  | "coin"
+  | "activity"
+  | "share"
+  | "refresh"
+  | "clipboard"
+  | "image"
+  | "chevron-down"
+  | "check"
+  | "alert"
+  | "monitor";
 
 export const iconPaths: Record<IconName, string> = {
   external:
@@ -23,4 +36,21 @@ export const iconPaths: Record<IconName, string> = {
     "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
   menu: "M4 6h16 M4 12h16 M4 18h16",
   grid: "M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z",
+  shield:
+    "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  users:
+    "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75",
+  search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M21 21l-4.35-4.35",
+  coin: "M12 2v20 M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
+  activity: "M22 12h-4l-3 9L9 3l-3 9H2",
+  share: "M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8 M16 6l-4-4-4 4 M12 2v13",
+  refresh: "M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15",
+  clipboard:
+    "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2 M9 2h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z",
+  image: "M15 8h.01 M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z M3 16l5-5c.928-.893 2.072-.893 3 0l4 4 M14 14l1-1c.928-.893 2.072-.893 3 0l2 2",
+  "chevron-down": "M6 9l6 6 6-6",
+  check: "M20 6L9 17l-5-5",
+  alert: "M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01",
+  monitor:
+    "M8 21h8 M12 17v4 M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5z",
 };

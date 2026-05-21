@@ -1,0 +1,64 @@
+---
+import Icon from "./Icon.astro";
+
+const appUrl = "https://app.hideoutbutler.com";
+---
+
+<section id="privacy" class="section-divider border-b border-ink-800 bg-ink-950 py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="section-heading">Privacy &amp; data</h2>
+      <p class="section-subheading">
+        Hideout Butler uses the official GGG OAuth flow. Your access token never
+        reaches the browser.
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 sm:grid-cols-2">
+      <li class="card-pane p-6">
+        <div class="mb-3 inline-flex rounded-lg bg-ember-500/10 p-2 text-ember-400">
+          <Icon name="shield" class="h-5 w-5" />
+        </div>
+        <h3 class="font-semibold text-parchment-50">OAuth tokens</h3>
+        <p class="mt-2 text-sm leading-relaxed text-parchment-200/85">
+          GGG access tokens are encrypted at rest (AES-GCM) and stored server-side
+          only. Sessions use signed httpOnly cookies — no JWT or token in
+          JavaScript.
+        </p>
+      </li>
+      <li class="card-pane p-6">
+        <div class="mb-3 inline-flex rounded-lg bg-ember-500/10 p-2 text-ember-400">
+          <Icon name="refresh" class="h-5 w-5" />
+        </div>
+        <h3 class="font-semibold text-parchment-50">Snapshots, not live sync</h3>
+        <p class="mt-2 text-sm leading-relaxed text-parchment-200/85">
+          Character and stash data are fetched on Refresh and stored as snapshots
+          in PostgreSQL. The app does not stream live inventory changes between
+          refreshes.
+        </p>
+      </li>
+      <li class="card-pane p-6">
+        <div class="mb-3 inline-flex rounded-lg bg-ember-500/10 p-2 text-ember-400">
+          <Icon name="link" class="h-5 w-5" />
+        </div>
+        <h3 class="font-semibold text-parchment-50">Public share links</h3>
+        <p class="mt-2 text-sm leading-relaxed text-parchment-200/85">
+          Share URLs are world-readable by design — anyone with the link can view
+          that item snapshot without logging in. Create links only for items you
+          are comfortable showing; revoke them anytime. Creation is rate-limited.
+        </p>
+      </li>
+      <li class="card-pane p-6">
+        <div class="mb-3 inline-flex rounded-lg bg-ember-500/10 p-2 text-ember-400">
+          <Icon name="globe" class="h-5 w-5" />
+        </div>
+        <h3 class="font-semibold text-parchment-50">Third-party APIs</h3>
+        <p class="mt-2 text-sm leading-relaxed text-parchment-200/85">
+          Pricing may call poe.ninja and the public GGG PoE2 trade JSON API.
+          Complements poe.ninja — focused on your own gear and stash snapshots,
+          not league-wide economy dashboards.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>

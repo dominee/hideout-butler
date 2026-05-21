@@ -20,20 +20,15 @@ const roadmapItems = [
     status: "Planned",
     description: "Fixed-grid layout matching the in-game currency stash tab.",
   },
-  {
-    title: "Real GGG API approval",
-    status: "Pending upstream",
-    description: "Production stash integration depends on GGG adding PoE2 stash OAuth scopes.",
-  },
 ];
 ---
 
-<section id="roadmap" class="border-b border-ink-800 bg-ink-950 py-16 sm:py-24">
+<section id="roadmap" class="section-divider border-b border-ink-800 bg-ink-950 py-16 sm:py-24">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl">
       <h2 class="section-heading">Roadmap</h2>
       <p class="section-subheading">
-        What we are building next — subject to GGG API availability and community
+        Planned UI improvements — subject to GGG API availability and community
         feedback.
       </p>
     </div>
@@ -48,7 +43,7 @@ const roadmapItems = [
                 {item.status}
               </span>
             </div>
-            <p class="mt-2 text-sm leading-relaxed text-parchment-200/75">
+            <p class="mt-2 text-sm leading-relaxed text-parchment-200/85">
               {item.description}
             </p>
           </li>

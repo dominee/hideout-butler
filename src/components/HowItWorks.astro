@@ -1,0 +1,55 @@
+---
+import Icon from "./Icon.astro";
+import type { IconName } from "../lib/icons";
+
+const steps: { icon: IconName; title: string; body: string }[] = [
+  {
+    icon: "shield",
+    title: "Sign in with GGG OAuth",
+    body: "Authorize with your Grinding Gear Games account. Tokens stay on the server — never in the browser.",
+  },
+  {
+    icon: "refresh",
+    title: "Refresh your snapshot",
+    body: "Pull the latest character gear (and stash when GGG adds the scope). Activity tracking starts after your first refresh.",
+  },
+  {
+    icon: "search",
+    title: "Inspect, price, share, or trade",
+    body: "Open any item for mod tiers and roll bars, queue pricing, export PNGs, copy PoE2 text, or jump to trade-site searches.",
+  },
+];
+---
+
+<section id="how-it-works" class="section-divider border-b border-ink-800 bg-ink-900 py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="section-heading">How it works</h2>
+      <p class="section-subheading">
+        Three steps from login to a priced, shareable item card.
+      </p>
+    </div>
+
+    <ol class="mt-12 grid gap-8 sm:grid-cols-3">
+      {
+        steps.map((step, index) => (
+          <li class="card-pane relative p-6">
+            <span
+              class="absolute -top-3 left-6 rounded-full bg-ember-500 px-2.5 py-0.5 text-xs font-bold text-ink-950"
+              aria-hidden="true"
+            >
+              {index + 1}
+            </span>
+            <div class="mb-4 inline-flex rounded-lg bg-ember-500/10 p-2.5 text-ember-400">
+              <Icon name={step.icon} class="h-5 w-5" />
+            </div>
+            <h3 class="font-semibold text-parchment-50">{step.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-parchment-200/85">
+              {step.body}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

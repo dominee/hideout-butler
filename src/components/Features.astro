@@ -1,49 +1,125 @@
 ---
-const features = [
+import Icon from "./Icon.astro";
+import type { IconName } from "../lib/icons";
+
+type FeatureStatus = "available" | "blocked";
+
+type Feature = {
+  title: string;
+  description: string;
+  icon: IconName;
+  status?: FeatureStatus;
+};
+
+type FeatureGroup = {
+  title: string;
+  features: Feature[];
+};
+
+const featureGroups: FeatureGroup[] = [
   {
-    title: "GGG OAuth2 login",
-    description:
-      "Sign in with your Grinding Gear Games account. Tokens stay server-side — never exposed to the browser.",
+    title: "Inspect",
+    features: [
+      {
+        title: "Mod tiers & roll quality",
+        description:
+          "Explicit mod tiers (T1–T8), roll range bars, and item score — know how good your rolls really are.",
+        icon: "chart",
+      },
+      {
+        title: "Character stat summary",
+        description:
+          "Per-section equipment stats with T1 quality bars — Life, resistances, attributes, and more at a glance.",
+        icon: "users",
+      },
+      {
+        title: "Unique reference data",
+        description:
+          "Flavour text and wiki-style roll hints for specific uniques — richer detail than raw API payloads alone.",
+        icon: "star",
+      },
+      {
+        title: "Runes & soul cores",
+        description:
+          "Socketed items parsed recursively with full effect text for each rune and soul core slot.",
+        icon: "grid",
+      },
+    ],
   },
   {
-    title: "Character gear snapshots",
-    description:
-      "View all your characters and equipped items in a clean grid or table layout with stat summaries.",
+    title: "Trade",
+    features: [
+      {
+        title: "Trade search deep links",
+        description:
+          "Exact tolerance, upgrade floor, or weighted upgrade by tier — trade JSON copied to clipboard.",
+        icon: "search",
+      },
+      {
+        title: "Price estimates",
+        description:
+          "Bulk poe.ninja data plus optional refined GGG trade API numbers — only when you explicitly refresh pricing.",
+        icon: "coin",
+      },
+      {
+        title: "Copy PoE2 item text",
+        description:
+          "Clipboard-ready PoE2 block strings for build planners and trade tools.",
+        icon: "clipboard",
+      },
+    ],
   },
   {
-    title: "Stash tab browsing",
-    description:
-      "Browse stash tabs with grid and table views, valuable-item highlights, and layout options.",
+    title: "Share",
+    features: [
+      {
+        title: "Public share links",
+        description:
+          "World-readable item pages — create only for gear you are comfortable showing; revoke anytime.",
+        icon: "link",
+      },
+      {
+        title: "Image export",
+        description:
+          "Discord-ready PNGs: compact card or full detail layout with tiers, ranges, and roll bars.",
+        icon: "image",
+      },
+    ],
   },
   {
-    title: "Mod tiers & roll quality",
-    description:
-      "Explicit mod tiers (T1–T8), roll range bars, and item score — know how good your rolls really are.",
-  },
-  {
-    title: "Trade search deep links",
-    description:
-      "One-click trade site searches: exact tolerance, upgrade floor, or weighted upgrade by tier.",
-  },
-  {
-    title: "Price estimates",
-    description:
-      "Hybrid pricing from poe.ninja bulk data plus optional refined GGG trade API estimates on demand.",
-  },
-  {
-    title: "Activity log",
-    description:
-      "See what changed since your last refresh — new and changed items highlighted across tabs.",
-  },
-  {
-    title: "Share links & image export",
-    description:
-      "Create public read-only item pages or export Discord-ready PNGs of your gear.",
+    title: "Track",
+    features: [
+      {
+        title: "Activity log",
+        description:
+          "Diff stash tabs and equipped gear since your last refresh — new and changed items highlighted.",
+        icon: "activity",
+      },
+      {
+        title: "Valuable highlights",
+        description:
+          "Gold outlines on items at or above your configurable chaos threshold — spot loot worth keeping.",
+        icon: "coin",
+      },
+      {
+        title: "Snapshot refresh & Apprise",
+        description:
+          "Manual Refresh pulls GGG data; Apprise queues bulk hybrid pricing for items missing estimates.",
+        icon: "refresh",
+      },
+      {
+        title: "Stash tab browsing",
+        description:
+          "Grid and table views with layout options — fully built; live PoE2 stash blocked until GGG adds OAuth scope.",
+        icon: "grid",
+        status: "blocked",
+      },
+    ],
   },
 ];
 ---
 
-<section id="features" class="border-b border-ink-800 bg-ink-900 py-16 sm:py-24">
+<section id="features" class="section-divider border-b border-ink-800 bg-ink-950 py-16 sm:py-24">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl">
       <h2 class="section-heading">Features</h2>
@@ -53,21 +129,32 @@ const features = [
       </p>
     </div>
 
-    <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {
-        features.map((feature) => (
-          <li class="card-pane group p-6 transition hover:border-ember-500/30">
-            <div
-              class="mb-4 h-1 w-8 rounded-full bg-ember-500/80 transition group-hover:w-12 group-hover:bg-ember-400"
-              aria-hidden="true"
-            />
-            <h3 class="font-semibold text-parchment-50">{feature.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-parchment-200/75">
-              {feature.description}
-            </p>
-          </li>
-        ))
-      }
-    </ul>
+    {
+      featureGroups.map((group) => (
+        <div class="mt-14 first:mt-12">
+          <h3 class="font-display text-xl font-semibold text-ember-400">
+            {group.title}
+          </h3>
+          <ul class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {group.features.map((feature) => (
+              <li class="card-pane group p-6 transition hover:border-ember-500/30">
+                <div class="mb-4 flex items-start justify-between gap-2">
+                  <div class="inline-flex rounded-lg bg-ember-500/10 p-2.5 text-ember-400 transition group-hover:bg-ember-500/20">
+                    <Icon name={feature.icon} class="h-5 w-5" />
+                  </div>
+                  {feature.status === "blocked" && (
+                    <span class="feature-status-blocked">Blocked on GGG API</span>
+                  )}
+                </div>
+                <h4 class="font-semibold text-parchment-50">{feature.title}</h4>
+                <p class="mt-2 text-sm leading-relaxed text-parchment-200/85">
+                  {feature.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
   </div>
 </section>
