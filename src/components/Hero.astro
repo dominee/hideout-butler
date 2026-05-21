@@ -1,0 +1,92 @@
+---
+import ImageLightbox from "./ImageLightbox.astro";
+
+const appUrl = "https://app.hideoutbutler.com";
+const githubUrl = "https://github.com/dominee/PoE2-butler";
+
+const heroScreenshot = {
+  src: "/screenshots/Screenshot.png",
+  alt: "Hideout Butler main screen showing character gear, stat summary, and item detail pane",
+  width: 1920,
+  height: 1080,
+};
+---
+
+<section
+  class="relative overflow-hidden border-b border-ink-800 bg-ink-950"
+  aria-labelledby="hero-heading"
+>
+  <div
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(200,160,64,0.15),transparent)]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute -right-32 top-1/4 h-96 w-96 rounded-full bg-ember-500/5 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8"
+  >
+    <div>
+      <p
+        class="mb-4 inline-flex rounded-full border border-ember-500/30 bg-ember-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-ember-400"
+      >
+        Path of Exile 2
+      </p>
+      <h1
+        id="hero-heading"
+        class="font-display text-4xl font-bold leading-tight text-parchment-50 sm:text-5xl lg:text-6xl"
+      >
+        Your hideout,<br />
+        <span class="text-ember-400">online.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-parchment-200/90">
+        Browse your characters' gear and stash from any browser. See mod tiers,
+        roll quality, price estimates, and trade-site deep links — all in one
+        place.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href={appUrl} class="btn-primary">
+          Open App
+          <span aria-hidden="true" class="ml-1.5">→</span>
+        </a>
+        <a href={githubUrl} class="btn-ghost" target="_blank" rel="noopener noreferrer">
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <div class="relative lg:justify-self-end">
+      <div
+        class="absolute -inset-4 rounded-2xl bg-gradient-to-br from-ember-500/20 via-transparent to-ink-800/50 blur-2xl"
+        aria-hidden="true"
+      >
+      </div>
+      <figure class="relative overflow-hidden rounded-xl border border-ink-600 shadow-pane">
+        <div
+          class="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-ink-950/80 via-transparent to-transparent"
+          aria-hidden="true"
+        >
+        </div>
+        <ImageLightbox
+          src={heroScreenshot.src}
+          alt={heroScreenshot.alt}
+          width={heroScreenshot.width}
+          height={heroScreenshot.height}
+        >
+          <img
+            src={heroScreenshot.src}
+            alt={heroScreenshot.alt}
+            width={heroScreenshot.width}
+            height={heroScreenshot.height}
+            class="w-full"
+            loading="eager"
+          />
+        </ImageLightbox>
+      </figure>
+    </div>
+  </div>
+</section>

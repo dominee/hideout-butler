@@ -1,0 +1,56 @@
+---
+const screenshots = [
+  {
+    src: "/screenshots/item-6ccf44f0-detail.png",
+    alt: "Rare weapon item detail export showing mod tiers and roll quality bars",
+    caption: "Rare item detail — mod tiers, roll ranges, and item score",
+  },
+  {
+    src: "/screenshots/item-74538585-detail.png",
+    alt: "Unique item detail export with flavour text and explicit mods",
+    caption: "Unique item detail — flavour text and roll visualisation",
+  },
+  {
+    src: "/screenshots/item_detail_menu.png",
+    alt: "Item detail action menu with share, export, trade search, and upgrade buttons",
+    caption: "Item actions — share links, image export, trade search, upgrades",
+  },
+  {
+    src: "/screenshots/stash.png",
+    alt: "Stash tab icon grid with valuable item highlights",
+    caption: "Stash view — icon grid with activity and value highlights",
+  },
+];
+---
+
+<section id="screenshots" class="border-b border-ink-800 bg-ink-950 py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="section-heading">Screenshots</h2>
+      <p class="section-subheading">
+        A glimpse of the app in action — dark PoE-inspired UI with analytical
+        depth beneath every item.
+      </p>
+    </div>
+
+    <div class="mt-12 -mx-4 flex gap-6 overflow-x-auto px-4 pb-4 snap-x snap-mandatory sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      {
+        screenshots.map((shot) => (
+          <figure class="card-pane w-[min(85vw,420px)] shrink-0 snap-center overflow-hidden">
+            <img
+              src={shot.src}
+              alt={shot.alt}
+              width="800"
+              height="600"
+              class="w-full object-cover"
+              loading="lazy"
+            />
+            <figcaption class="border-t border-ink-600/80 px-4 py-3 text-sm text-parchment-200/80">
+              {shot.caption}
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

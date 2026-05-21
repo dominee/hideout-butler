@@ -1,0 +1,45 @@
+---
+const limitations = [
+  {
+    title: "PoE2 stash API not available yet",
+    body: "Grinding Gear Games has not released a PoE2 stash OAuth scope. Live stash data from the real GGG API cannot be used in production until GGG adds one. Stash browsing works end-to-end in development and demo mode using mock data.",
+  },
+  {
+    title: "Pricing is indicative",
+    body: "Price estimates come from poe.ninja bulk data and optional GGG trade API snapshots. Numbers are estimates — not live market guarantees — and may lag behind in-game prices.",
+  },
+  {
+    title: "Weighted upgrade trade search",
+    body: "The weighted upgrade mode uses GGG's trade API weight stat groups to prioritise your best-tier mods. Anonymous server-side calls exceed GGG's complexity budget and are rejected with HTTP 400. The app falls back to a regular upgrade search so you still receive a valid trade link, but true weighted matching is not available until authenticated trade API access is supported.",
+  },
+  {
+    title: "Not affiliated with GGG",
+    body: "Hideout Butler is an independent third-party tool. It is not affiliated with or endorsed by Grinding Gear Games.",
+  },
+];
+---
+
+<section id="limitations" class="border-b border-ink-800 bg-ink-900 py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="section-heading">Current limitations</h2>
+      <p class="section-subheading">
+        We believe in transparency. Here is what the app can and cannot do
+        today.
+      </p>
+    </div>
+
+    <ul class="mt-12 space-y-6">
+      {
+        limitations.map((item) => (
+          <li class="card-pane border-l-4 border-l-ember-500/60 p-6 sm:p-8">
+            <h3 class="font-semibold text-parchment-50">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-parchment-200/80 sm:text-base">
+              {item.body}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,105 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  imageClass?: string;
+  hint?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  imageClass = "w-full",
+  hint = "Click to enlarge",
+} = Astro.props;
+
+const lightboxId = `lightbox-${src.replace(/[^\w-]/g, "-")}`;
+---
+
+<button
+  type="button"
+  class="group relative block w-full cursor-zoom-in border-0 bg-transparent p-0 text-left"
+  data-lightbox-trigger={lightboxId}
+  aria-haspopup="dialog"
+  aria-label={`${alt}. ${hint}.`}
+>
+  <slot />
+  <span
+    class="pointer-events-none absolute bottom-3 right-3 rounded-md border border-ink-600/80 bg-ink-950/80 px-2.5 py-1 text-xs font-medium text-parchment-200/90 opacity-0 backdrop-blur-sm transition group-hover:opacity-100 group-focus-visible:opacity-100"
+  >
+    {hint}
+  </span>
+</button>
+
+<dialog
+  id={lightboxId}
+  class="lightbox-dialog fixed inset-0 z-[100] m-0 h-full max-h-none w-full max-w-none border-0 bg-ink-950/95 p-4 backdrop:bg-ink-950/90 open:flex open:items-center open:justify-center"
+  aria-label={alt}
+>
+  <button
+    type="button"
+    class="absolute right-4 top-4 z-10 rounded-md border border-ink-600 bg-ink-900/90 px-3 py-1.5 text-sm font-medium text-parchment-100 transition hover:border-ember-500/50 hover:text-ember-400"
+    data-lightbox-close
+    aria-label="Close enlarged image"
+  >
+    Close
+  </button>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    class="max-h-[92vh] max-w-[min(96vw,1920px)] object-contain"
+  />
+</dialog>
+
+<script>
+  function initLightboxes() {
+    document.querySelectorAll("[data-lightbox-trigger]").forEach((trigger) => {
+      if (trigger.dataset.lightboxBound === "true") return;
+      trigger.dataset.lightboxBound = "true";
+
+      const id = trigger.getAttribute("data-lightbox-trigger");
+      if (!id) return;
+
+      const dialog = document.getElementById(id);
+      if (!(dialog instanceof HTMLDialogElement)) return;
+
+      const open = () => {
+        if (!dialog.open) dialog.showModal();
+      };
+
+      const close = () => {
+        if (dialog.open) dialog.close();
+      };
+
+      trigger.addEventListener("click", open);
+
+      dialog.querySelectorAll("[data-lightbox-close]").forEach((btn) => {
+        btn.addEventListener("click", close);
+      });
+
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) close();
+      });
+
+      dialog.addEventListener("cancel", (event) => {
+        event.preventDefault();
+        close();
+      });
+    });
+  }
+
+  initLightboxes();
+  document.addEventListener("astro:page-load", initLightboxes);
+</script>
+
+<style>
+  .lightbox-dialog::backdrop {
+    background: rgba(11, 11, 13, 0.92);
+  }
+</style>

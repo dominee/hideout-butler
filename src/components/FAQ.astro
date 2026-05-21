@@ -1,0 +1,72 @@
+---
+const faqs = [
+  {
+    question: "Is Hideout Butler free?",
+    answer:
+      "Yes. Hideout Butler is free to use. You sign in with your GGG account via OAuth2 — no separate account or password is required for the app itself.",
+  },
+  {
+    question: "Do I need a Path of Exile 2 account?",
+    answer:
+      "Yes. You log in with Grinding Gear Games OAuth. The app reads your character and (when available) stash data through the official GGG API.",
+  },
+  {
+    question: "Why can't I see my stash tabs?",
+    answer:
+      "GGG has not yet released a PoE2 stash OAuth scope. Until they do, live stash data from the real API is unavailable. Character gear and other features work today; stash browsing is fully functional in demo/development mode.",
+  },
+  {
+    question: "Where does character gear data come from?",
+    answer:
+      "After OAuth login, production character data comes from the official GGG API. In development and demo environments, character snapshots are currently sourced from public poe.ninja character exports when live GGG data is limited or for showcase accounts.",
+  },
+  {
+    question: "Where does pricing data come from?",
+    answer:
+      "Bulk estimates come from poe.ninja. For refined numbers on individual items, the app can query the public GGG PoE2 trade JSON API on demand (after you explicitly request a refresh). All prices are labelled as indicative estimates.",
+  },
+  {
+    question: "Is my OAuth token stored securely?",
+    answer:
+      "Access tokens are encrypted at rest (AES-GCM) and never sent to the browser. Sessions use signed httpOnly cookies. All GGG API calls are made server-side only.",
+  },
+];
+---
+
+<section id="faq" class="border-b border-ink-800 bg-ink-900 py-16 sm:py-24">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 class="section-heading">FAQ</h2>
+      <p class="section-subheading mx-auto">
+        Common questions about Hideout Butler and how it works.
+      </p>
+    </div>
+
+    <div class="mt-12 space-y-3">
+      {
+        faqs.map((faq) => (
+          <details class="group card-pane overflow-hidden">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-4 font-medium text-parchment-50 transition hover:text-ember-400 [&::-webkit-details-marker]:hidden">
+              {faq.question}
+              <span
+                class="shrink-0 text-ember-400 transition group-open:rotate-180"
+                aria-hidden="true"
+              >
+                ▼
+              </span>
+            </summary>
+            <div class="border-t border-ink-600/80 px-6 py-4 text-sm leading-relaxed text-parchment-200/80">
+              {faq.answer}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  details[open] summary {
+    color: #f0b44c;
+  }
+</style>

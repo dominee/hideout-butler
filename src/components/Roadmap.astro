@@ -1,0 +1,59 @@
+---
+const roadmapItems = [
+  {
+    title: "Image-first icon grid stash view",
+    status: "Planned",
+    description: "Display item icons from the PoE CDN with stat overlays in the stash grid.",
+  },
+  {
+    title: "Cross-tab stash search",
+    status: "Planned",
+    description: "Search across all loaded stash tab snapshots, not just the current tab.",
+  },
+  {
+    title: "Character items table view",
+    status: "Planned",
+    description: "Mirror the stash table view for equipped character gear.",
+  },
+  {
+    title: "Currency stash tab renderer",
+    status: "Planned",
+    description: "Fixed-grid layout matching the in-game currency stash tab.",
+  },
+  {
+    title: "Real GGG API approval",
+    status: "Pending upstream",
+    description: "Production stash integration depends on GGG adding PoE2 stash OAuth scopes.",
+  },
+];
+---
+
+<section id="roadmap" class="border-b border-ink-800 bg-ink-950 py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="section-heading">Roadmap</h2>
+      <p class="section-subheading">
+        What we are building next — subject to GGG API availability and community
+        feedback.
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 sm:grid-cols-2">
+      {
+        roadmapItems.map((item) => (
+          <li class="card-pane p-6">
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="font-semibold text-parchment-50">{item.title}</h3>
+              <span class="shrink-0 rounded-full border border-ember-500/30 bg-ember-500/10 px-2.5 py-0.5 text-xs font-medium text-ember-400">
+                {item.status}
+              </span>
+            </div>
+            <p class="mt-2 text-sm leading-relaxed text-parchment-200/75">
+              {item.description}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

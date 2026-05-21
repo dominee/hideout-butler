@@ -1,0 +1,73 @@
+---
+const features = [
+  {
+    title: "GGG OAuth2 login",
+    description:
+      "Sign in with your Grinding Gear Games account. Tokens stay server-side — never exposed to the browser.",
+  },
+  {
+    title: "Character gear snapshots",
+    description:
+      "View all your characters and equipped items in a clean grid or table layout with stat summaries.",
+  },
+  {
+    title: "Stash tab browsing",
+    description:
+      "Browse stash tabs with grid and table views, valuable-item highlights, and layout options.",
+  },
+  {
+    title: "Mod tiers & roll quality",
+    description:
+      "Explicit mod tiers (T1–T8), roll range bars, and item score — know how good your rolls really are.",
+  },
+  {
+    title: "Trade search deep links",
+    description:
+      "One-click trade site searches: exact tolerance, upgrade floor, or weighted upgrade by tier.",
+  },
+  {
+    title: "Price estimates",
+    description:
+      "Hybrid pricing from poe.ninja bulk data plus optional refined GGG trade API estimates on demand.",
+  },
+  {
+    title: "Activity log",
+    description:
+      "See what changed since your last refresh — new and changed items highlighted across tabs.",
+  },
+  {
+    title: "Share links & image export",
+    description:
+      "Create public read-only item pages or export Discord-ready PNGs of your gear.",
+  },
+];
+---
+
+<section id="features" class="border-b border-ink-800 bg-ink-900 py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <h2 class="section-heading">Features</h2>
+      <p class="section-subheading">
+        Everything you need to inspect, price, and share your PoE2 gear without
+        launching the game.
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        features.map((feature) => (
+          <li class="card-pane group p-6 transition hover:border-ember-500/30">
+            <div
+              class="mb-4 h-1 w-8 rounded-full bg-ember-500/80 transition group-hover:w-12 group-hover:bg-ember-400"
+              aria-hidden="true"
+            />
+            <h3 class="font-semibold text-parchment-50">{feature.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-parchment-200/75">
+              {feature.description}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

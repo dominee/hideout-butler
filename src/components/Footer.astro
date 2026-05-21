@@ -1,0 +1,46 @@
+---
+const appUrl = "https://app.hideoutbutler.com";
+const githubUrl = "https://github.com/dominee/PoE2-butler";
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-ink-950 py-12">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col items-center gap-6 text-center">
+      <p class="max-w-2xl text-sm leading-relaxed text-parchment-200/70">
+        This product isn't affiliated with or endorsed by Grinding Gear Games in
+        any way.
+      </p>
+
+      <nav
+        class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm"
+        aria-label="Footer navigation"
+      >
+        <a
+          href={appUrl}
+          class="text-parchment-200 transition hover:text-ember-400"
+        >
+          Open App
+        </a>
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-parchment-200 transition hover:text-ember-400"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://hideoutbutler.com"
+          class="text-parchment-200 transition hover:text-ember-400"
+        >
+          hideoutbutler.com
+        </a>
+      </nav>
+
+      <p class="text-xs text-parchment-200/50">
+        © {year} Hideout Butler
+      </p>
+    </div>
+  </div>
+</footer>
