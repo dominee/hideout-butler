@@ -1,24 +1,159 @@
 ---
-const screenshots = [
+type Callout = {
+  top: string;
+  title: string;
+  body: string;
+};
+
+type MenuFeature = {
+  title: string;
+  body: string;
+};
+
+type ShowcaseSlide = {
+  id: string;
+  label: string;
+  src: string;
+  alt: string;
+  kind: "annotated" | "menu" | "stash";
+  callouts?: Callout[];
+  features?: MenuFeature[];
+};
+
+const slides: ShowcaseSlide[] = [
   {
+    id: "rare-detail",
+    label: "Rare item detail",
     src: "/screenshots/item-6ccf44f0-detail.png",
     alt: "Rare weapon item detail export showing mod tiers and roll quality bars",
-    caption: "Rare item detail — mod tiers, roll ranges, and item score",
+    kind: "annotated",
+    callouts: [
+      {
+        top: "10%",
+        title: "Pricing",
+        body: "Hybrid market estimate shown in divine and exalted orbs — bulk poe.ninja data with optional refined trade API numbers on refresh.",
+      },
+      {
+        top: "19%",
+        title: "Item score",
+        body: "Overall roll quality for the item, aggregated across explicit mods and displayed as a percentage bar (here 116%).",
+      },
+      {
+        top: "38%",
+        title: "Runes & cores",
+        body: "Socketed runes and soul cores are parsed recursively, each with its own effect text for the item type it applies to.",
+      },
+      {
+        top: "54%",
+        title: "Prefix rolls & spreads",
+        body: "Each prefix shows tier (e.g. T2/8), the rolled value, possible range for that tier, T1 cap, and a roll rating bar with percentage.",
+      },
+      {
+        top: "78%",
+        title: "Suffix rolls & spreads",
+        body: "Suffixes use the same breakdown — tier label, numeric spread, and roll rating so you can see how close each mod is to perfect.",
+      },
+    ],
   },
   {
+    id: "unique-detail",
+    label: "Unique item detail",
     src: "/screenshots/item-74538585-detail.png",
     alt: "Unique item detail export with flavour text and explicit mods",
-    caption: "Unique item detail — flavour text and roll visualisation",
+    kind: "annotated",
+    callouts: [
+      {
+        top: "10%",
+        title: "Pricing",
+        body: "Estimated value for uniques uses the same hybrid pricing pipeline — shown inline next to the item header.",
+      },
+      {
+        top: "20%",
+        title: "Item quality",
+        body: "Overall quality score for variable unique rolls, summarised as a single percentage bar across rated mods.",
+      },
+      {
+        top: "34%",
+        title: "Implicit roll spreads",
+        body: "Implicit mods show their possible range (e.g. 20–30% stun threshold) plus a type-quality bar rating the current roll within that spread.",
+      },
+      {
+        top: "52%",
+        title: "Unique mod rolls",
+        body: "Variable unique stats (+Life, +Str, +Dex, etc.) display min–max spreads and per-mod type-quality ratings — spot a well-rolled Headhunter at a glance.",
+      },
+      {
+        top: "82%",
+        title: "Fixed unique effect",
+        body: "Static unique text (non-variable) is shown verbatim below the rated mods — the signature modifier that defines the item.",
+      },
+    ],
   },
   {
+    id: "item-menu",
+    label: "Item actions",
     src: "/screenshots/item_detail_menu.png",
     alt: "Item detail action menu with share, export, trade search, and upgrade buttons",
-    caption: "Item actions — share links, image export, trade search, upgrades",
+    kind: "menu",
+    features: [
+      {
+        title: "Create & copy link",
+        body: "Generate a public read-only page for this item snapshot — no GGG account or app login required for viewers.",
+      },
+      {
+        title: "Image / Image (detail)",
+        body: "Export Discord-ready PNGs: a compact card or a full detail layout with tiers, ranges, and roll bars.",
+      },
+      {
+        title: "Copy PoE2 item text",
+        body: "Copy the item as PoE2-style clipboard text for pasting into trade tools or build planners.",
+      },
+      {
+        title: "Exact tolerance + Save",
+        body: "Set the percentage tolerance used for exact-match trade searches; saved per user for later searches.",
+      },
+      {
+        title: "Trade Search",
+        body: "Submit a trade-site search from the item's stats using your saved tolerance — opens results on the official PoE2 trade site.",
+      },
+      {
+        title: "Upgrade",
+        body: "Search for upgrades with min-floor rolls at ~95% of your current values on each stat.",
+      },
+      {
+        title: "Upgrade (weighted)",
+        body: "Prioritise your highest-tier mods when searching for upgrades. Falls back to regular upgrade when GGG rejects weighted queries.",
+      },
+    ],
   },
   {
+    id: "stash",
+    label: "Stash view",
     src: "/screenshots/stash.png",
     alt: "Stash tab icon grid with valuable item highlights",
-    caption: "Stash view — icon grid with activity and value highlights",
+    kind: "stash",
+    callouts: [
+      {
+        top: "12%",
+        title: "Icon grid layout",
+        body: "Items render in a fixed grid using PoE CDN icons, respecting each item's cell footprint (1×1 rings up to 2×4 weapons).",
+      },
+      {
+        top: "35%",
+        title: "Valuable highlights",
+        body: "Items at or above your chaos threshold get a gold outline so high-value drops stand out in a full tab.",
+      },
+      {
+        top: "58%",
+        title: "Activity indicators",
+        body: "New items show a green dot; changed items an amber dot — driven by the activity log diff since your last refresh.",
+      },
+      {
+        top: "80%",
+        title: "Grid & table modes",
+        body: "Switch between icon grid and sortable table views; filter and layout preferences persist per tab.",
+      },
+    ],
   },
 ];
 ---
@@ -33,24 +168,194 @@ const screenshots = [
       </p>
     </div>
 
-    <div class="mt-12 -mx-4 flex gap-6 overflow-x-auto px-4 pb-4 snap-x snap-mandatory sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-      {
-        screenshots.map((shot) => (
-          <figure class="card-pane w-[min(85vw,420px)] shrink-0 snap-center overflow-hidden">
-            <img
-              src={shot.src}
-              alt={shot.alt}
-              width="800"
-              height="600"
-              class="w-full object-cover"
-              loading="lazy"
-            />
-            <figcaption class="border-t border-ink-600/80 px-4 py-3 text-sm text-parchment-200/80">
-              {shot.caption}
-            </figcaption>
-          </figure>
-        ))
-      }
+    <div class="mt-10" data-screenshot-showcase>
+      <div
+        class="flex flex-wrap gap-2"
+        role="tablist"
+        aria-label="Screenshot gallery"
+      >
+        {
+          slides.map((slide, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`tab-${slide.id}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              aria-controls={`panel-${slide.id}`}
+              data-screenshot-tab={slide.id}
+              class="rounded-md border border-ink-600 bg-ink-900/60 px-3 py-2 text-sm font-medium text-parchment-200/90 transition hover:border-ember-500/40 hover:text-ember-400 aria-selected:border-ember-500/50 aria-selected:bg-ember-500/10 aria-selected:text-ember-400"
+            >
+              {slide.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="mt-8">
+        {
+          slides.map((slide, index) => (
+            <div
+              id={`panel-${slide.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${slide.id}`}
+              data-screenshot-panel={slide.id}
+              class:list={["screenshot-panel", { "is-active": index === 0 }]}
+              hidden={index !== 0}
+            >
+              <div class="card-pane grid gap-8 overflow-hidden p-4 sm:p-6 lg:grid-cols-[minmax(0,380px)_1fr] lg:items-stretch lg:gap-10">
+                <figure class="mx-auto w-full max-w-[380px] lg:mx-0">
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    width="800"
+                    height="600"
+                    class="screenshot-image w-full rounded-md border border-ink-600/60"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </figure>
+
+                {slide.kind === "menu" && slide.features ? (
+                  <div class="flex min-h-0 flex-col justify-center">
+                    <h3 class="font-display text-lg font-semibold text-parchment-50">
+                      Item action menu
+                    </h3>
+                    <p class="mt-2 text-sm text-parchment-200/75">
+                      Tools available from the item detail pane — top to bottom
+                      as shown in the screenshot.
+                    </p>
+                    <ul class="mt-6 space-y-4">
+                      {slide.features.map((feature) => (
+                        <li class="border-l-2 border-ember-500/50 pl-4">
+                          <h4 class="text-sm font-semibold text-ember-400">
+                            {feature.title}
+                          </h4>
+                          <p class="mt-1 text-sm leading-relaxed text-parchment-200/80">
+                            {feature.body}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <div class="relative min-h-[320px] lg:min-h-0">
+                    <h3 class="mb-4 font-display text-lg font-semibold text-parchment-50 lg:sr-only">
+                      {slide.label}
+                    </h3>
+                    <div class="screenshot-callouts relative h-full min-h-[320px]">
+                      {slide.callouts?.map((callout) => (
+                        <div
+                          class="screenshot-callout absolute left-0 right-0 max-w-md"
+                          style={`top: ${callout.top};`}
+                        >
+                          <h4 class="text-sm font-semibold text-ember-400">
+                            {callout.title}
+                          </h4>
+                          <p class="mt-1 text-sm leading-relaxed text-parchment-200/80">
+                            {callout.body}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  function syncCalloutHeights(root: HTMLElement) {
+    root.querySelectorAll("[data-screenshot-panel]").forEach((panel) => {
+      const image = panel.querySelector(".screenshot-image");
+      const callouts = panel.querySelector(".screenshot-callouts");
+      if (!(image instanceof HTMLImageElement) || !(callouts instanceof HTMLElement)) {
+        return;
+      }
+
+      const setHeight = () => {
+        if (panel.hidden) return;
+        callouts.style.minHeight = `${image.offsetHeight}px`;
+      };
+
+      if (image.complete) {
+        setHeight();
+      } else {
+        image.addEventListener("load", setHeight, { once: true });
+      }
+    });
+  }
+
+  function initScreenshotShowcase() {
+    document.querySelectorAll("[data-screenshot-showcase]").forEach((root) => {
+      if (!(root instanceof HTMLElement)) return;
+      if (root.dataset.showcaseBound === "true") return;
+      root.dataset.showcaseBound = "true";
+
+      const tabs = root.querySelectorAll("[data-screenshot-tab]");
+      const panels = root.querySelectorAll("[data-screenshot-panel]");
+
+      const activate = (id: string) => {
+        tabs.forEach((tab) => {
+          const selected = tab.getAttribute("data-screenshot-tab") === id;
+          tab.setAttribute("aria-selected", selected ? "true" : "false");
+        });
+
+        panels.forEach((panel) => {
+          const active = panel.getAttribute("data-screenshot-panel") === id;
+          panel.classList.toggle("is-active", active);
+          panel.hidden = !active;
+        });
+
+        syncCalloutHeights(root);
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const id = tab.getAttribute("data-screenshot-tab");
+          if (id) activate(id);
+        });
+      });
+
+      syncCalloutHeights(root);
+      window.addEventListener("resize", () => syncCalloutHeights(root));
+    });
+  }
+
+  initScreenshotShowcase();
+  document.addEventListener("astro:page-load", initScreenshotShowcase);
+</script>
+
+<style>
+  .screenshot-callout {
+    padding-right: 0.5rem;
+  }
+
+  .screenshot-callout::before {
+    content: "";
+    position: absolute;
+    left: -1rem;
+    top: 0.45rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: rgba(200, 160, 64, 0.85);
+    box-shadow: 0 0 0 3px rgba(200, 160, 64, 0.15);
+  }
+
+  @media (max-width: 1023px) {
+    .screenshot-callout {
+      position: static !important;
+      margin-bottom: 1.25rem;
+      padding-left: 1rem;
+      max-width: none;
+    }
+
+    .screenshot-callouts {
+      min-height: 0 !important;
+    }
+  }
+</style>
