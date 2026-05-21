@@ -5,12 +5,17 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "astro build && node scripts/strip-redirects.mjs",
+    "preview": "astro preview",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/tailwind": "^6.0.2",
     "astro": "^5.7.10",
     "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "wrangler": "^4.93.1"
   }
 }

@@ -52,9 +52,9 @@ docker compose up --build    # preview at http://localhost:8080
 docker build -t hideout-butler-site .
 ```
 
-**Cloudflare Pages:** Node 22, `npm run build`, output `dist/`, `NODE_VERSION=22`.
+**Cloudflare:** `npm run build` then `npx wrangler deploy`; assets path in [`wrangler.jsonc`](wrangler.jsonc). Set `NODE_VERSION=22`.
 
-See [README.md](README.md).
+See [DEPLOY.md](DEPLOY.md).
 
 ## SEO
 

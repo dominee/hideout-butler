@@ -30,16 +30,15 @@ npm run preview
 
 ## Cloudflare Pages
 
-Cloudflare builds with Node in CI — no Docker needed for deploy.
+Cloudflare Git builds use a **mandatory deploy command** (no separate “Build output directory” field). Output path is in [`wrangler.jsonc`](wrangler.jsonc).
 
 | Setting | Value |
 |---------|-------|
-| Framework preset | Astro |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
-| Node version | `22` (set `NODE_VERSION=22` in environment variables) |
+| Deploy command | `npx wrangler deploy` |
+| Node version | `22` (`NODE_VERSION=22`) |
 
-Connect this repository in the Cloudflare Pages dashboard. Builds deploy automatically on push to the default branch.
+Full setup: **[DEPLOY.md](DEPLOY.md)**.
 
 ## Links
 
