@@ -1,4 +1,7 @@
 ---
+import Icon from "./Icon.astro";
+import type { IconName } from "../lib/icons";
+
 type Callout = {
   title: string;
   body: string;
@@ -12,6 +15,7 @@ type MenuFeature = {
 type ShowcaseSlide = {
   id: string;
   label: string;
+  icon: IconName;
   src: string;
   alt: string;
   kind: "annotated" | "menu" | "stash";
@@ -24,6 +28,7 @@ const slides: ShowcaseSlide[] = [
   {
     id: "rare-detail",
     label: "Rare item detail",
+    icon: "chart",
     src: "/screenshots/item-6ccf44f0-detail.png",
     alt: "Rare weapon item detail export showing mod tiers and roll quality bars",
     kind: "annotated",
@@ -58,6 +63,7 @@ const slides: ShowcaseSlide[] = [
   {
     id: "unique-detail",
     label: "Unique item detail",
+    icon: "star",
     src: "/screenshots/item-74538585-detail.png",
     alt: "Unique item detail export with flavour text and explicit mods",
     kind: "annotated",
@@ -88,6 +94,7 @@ const slides: ShowcaseSlide[] = [
   {
     id: "item-menu",
     label: "Item actions",
+    icon: "menu",
     src: "/screenshots/item_detail_menu.png",
     alt: "Item detail action menu with share, export, trade search, and upgrade buttons",
     kind: "menu",
@@ -126,6 +133,7 @@ const slides: ShowcaseSlide[] = [
   {
     id: "stash",
     label: "Stash view",
+    icon: "grid",
     src: "/screenshots/stash.png",
     alt: "Stash tab icon grid with valuable item highlights",
     kind: "stash",
@@ -186,8 +194,9 @@ function slideHeading(slide: ShowcaseSlide): string {
               aria-selected={index === 0 ? "true" : "false"}
               aria-controls={`panel-${slide.id}`}
               data-screenshot-tab={slide.id}
-              class="rounded-md border border-ink-600 bg-ink-900/60 px-3 py-2 text-sm font-medium text-parchment-200/90 transition hover:border-ember-500/40 hover:text-ember-400 aria-selected:border-ember-500/50 aria-selected:bg-ember-500/10 aria-selected:text-ember-400"
+              class="inline-flex items-center gap-2 rounded-md border border-ink-600 bg-ink-900/60 px-3 py-2 text-sm font-medium text-parchment-200/90 transition hover:border-ember-500/40 hover:text-ember-400 aria-selected:border-ember-500/50 aria-selected:bg-ember-500/10 aria-selected:text-ember-400"
             >
+              <Icon name={slide.icon} class="h-4 w-4 shrink-0" />
               {slide.label}
             </button>
           ))
