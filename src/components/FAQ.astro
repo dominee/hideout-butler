@@ -20,17 +20,17 @@ const faqs = [
   {
     question: "Is my data live?",
     answer:
-      "No — data is snapshot-based. Use Refresh to pull the latest character (and stash when available) from GGG. Pricing refined via the trade API runs only when you explicitly request it, not automatically on every item open.",
+      "No — data is snapshot-based. Use Refresh to pull the latest equipped gear from GGG (and stash when that scope is available). Pricing refined via the trade API runs only when you explicitly request it, not automatically on every item open.",
   },
   {
     question: "Why can't I see my stash tabs?",
     answer:
-      "GGG has not yet released a PoE2 stash OAuth scope. Until they do, live stash data from the real API is unavailable in production. Stash browsing is fully implemented and works in development and demo mode.",
+      "GGG has not yet released a PoE2 stash OAuth scope. Character gear works in production via account:characters; live stash data from the real API is unavailable until GGG adds a PoE2 stash scope. Stash browsing is fully implemented and works in local development with mock data.",
   },
   {
     question: "Where does character gear data come from?",
     answer:
-      "In production, character gear comes from the official GGG API after OAuth login (character-related scopes). Development and demo environments may use public poe.ninja character exports for showcase accounts when exercising the UI without live GGG data.",
+      "In production, equipped gear comes from the official GGG PoE2 character API after OAuth login (account:profile and account:characters). Local development uses a mock GGG service with fixture or poe.ninja-backed sample characters.",
   },
   {
     question: "Where does pricing data come from?",
@@ -45,7 +45,7 @@ const faqs = [
   {
     question: "What OAuth scopes are used?",
     answer:
-      "Hideout Butler requests only the GGG OAuth scopes needed for character and account data you approve at login. The exact list is shown on the GGG authorization screen when you click Sign in — we do not request scopes beyond what the app uses.",
+      "Production requests account:profile and account:characters — the scopes GGG has granted for PoE2. We do not request account:stashes or account:leagues in production because those scopes are not available for PoE2 yet; requesting undeclared scopes would break login. The exact list appears on the GGG authorization screen when you sign in.",
   },
   {
     question: "Is my OAuth token stored securely?",

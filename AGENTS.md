@@ -36,12 +36,15 @@ Footer must include verbatim GGG disclaimer:
 
 > This product isn't affiliated with or endorsed by Grinding Gear Games in any way.
 
-## Messaging rules
+## Messaging rules (2026-06)
 
+- **Live in production:** GGG OAuth2 with `account:profile` + `account:characters`; equipped gear via PoE2 `/character/poe2` API; paper doll and table views; activity diffs for character gear; runeforged item styling.
 - Do **not** imply live prod stash — GGG PoE2 stash OAuth scope is not available yet.
-- Stash feature card carries “Blocked on GGG API” badge.
+- Stash feature card carries “Blocked on GGG API” badge; stash screenshots labelled demo/dev.
+- **`account:leagues` not granted** — league picker is inferred from character data; mention in Limitations / FAQ when relevant.
 - Data is snapshot-based (manual Refresh); pricing refined on explicit user action.
 - Public share links are world-readable — warn in Privacy and FAQ.
+- UAT on the app side uses live GGG (not mock); this marketing site does not host UAT — only describe prod app behavior unless asked.
 
 ## Build & test
 

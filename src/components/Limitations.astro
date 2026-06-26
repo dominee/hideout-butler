@@ -2,7 +2,11 @@
 const limitations = [
   {
     title: "PoE2 stash API not available yet",
-    body: "Grinding Gear Games has not released a PoE2 stash OAuth scope. Live stash data from the real GGG API cannot be used in production until GGG adds one. Stash browsing works end-to-end in development and demo mode using mock data.",
+    body: "Grinding Gear Games has not released a PoE2 stash OAuth scope. Live stash data from the real GGG API cannot be used in production until GGG adds one. Stash browsing is fully implemented and works in local development using mock data.",
+  },
+  {
+    title: "League list inferred from characters",
+    body: "The account:leagues OAuth scope was not granted. Hideout Butler builds your league dropdown from character data and a configured default league — not from a dedicated leagues API call.",
   },
   {
     title: "Pricing is indicative",
@@ -13,8 +17,8 @@ const limitations = [
     body: "The weighted upgrade mode uses GGG's trade API weight stat groups to prioritise your best-tier mods. Anonymous server-side calls exceed GGG's complexity budget and are rejected with HTTP 400. The app falls back to a regular upgrade search so you still receive a valid trade link, but true weighted matching is not available until authenticated trade API access is supported.",
   },
   {
-    title: "GGG developer registration",
-    body: "Production integration depends on GGG approving the OAuth application and extending PoE2 API scopes (especially stash). That timeline is outside our control.",
+    title: "GGG OAuth scope rollout",
+    body: "GGG has granted account:profile and account:characters for live PoE2 character gear. Stash and league enumeration scopes are still pending — production character features work today; stash remains blocked until GGG extends PoE2 API access.",
   },
   {
     title: "Not affiliated with GGG",
