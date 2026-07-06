@@ -19,12 +19,16 @@ type ShowcaseSlide = {
   label: string;
   icon: IconName;
   src: string;
+  width: number;
+  height: number;
   alt: string;
-  kind: "annotated" | "menu" | "stash";
+  kind: "annotated" | "menu" | "stash" | "wide";
   tabAccent?: string;
   intro?: string;
   callouts?: Callout[];
   features?: MenuFeature[];
+  imageClass?: string;
+  figureClass?: string;
 };
 
 const slides: ShowcaseSlide[] = [
@@ -32,11 +36,18 @@ const slides: ShowcaseSlide[] = [
     id: "main-ui",
     label: "Main UI",
     icon: "monitor",
-    src: "/screenshots/Screenshot.png",
-    alt: "Hideout Butler main screen showing character gear, stat summary, and item detail pane",
+    src: "/screenshots/Screenshot.webp",
+    width: 2498,
+    height: 1280,
+    alt: "Hideout Butler main screen showing gear timeline, character gear, stat summary, and item detail pane",
     kind: "annotated",
-    intro: "The primary app layout — live GGG character gear, stats, activity, and item detail.",
+    intro: "The primary app layout — gear timeline, live GGG character gear, stats, activity, and item detail.",
     callouts: [
+      {
+        title: "Gear snapshot timeline",
+        summary: "Browse historic equipped gear after each change.",
+        body: "Dots appear only when items are added, removed, or modified. Click a dot for that snapshot's doll, table, stats, and item detail — Back to current when done.",
+      },
       {
         title: "Activity log",
         summary: "Track what changed since your last refresh.",
@@ -57,13 +68,88 @@ const slides: ShowcaseSlide[] = [
         summary: "Full mod breakdown, pricing, and actions.",
         body: "Trade search, share links, image export, and roll quality bars live here — the hub for inspecting a single item in depth.",
       },
+      {
+        title: "Share or export character",
+        summary: "Public character links and PNG exports.",
+        body: "Create simple or detailed share URLs — including historic timeline snapshots — or export a Discord-ready PNG of the full build.",
+      },
+    ],
+  },
+  {
+    id: "gear-timeline",
+    label: "Gear timeline",
+    icon: "activity",
+    src: "/screenshots/Timeline.webp",
+    width: 1318,
+    height: 298,
+    alt: "Gear snapshot timeline with change dots, diff list, and Back to current",
+    kind: "wide",
+    intro: "Timeline detail — each dot is a gear change event with a readable diff.",
+    callouts: [
+      {
+        title: "Change dots",
+        summary: "One dot per meaningful gear update.",
+        body: "Unchanged refreshes are not stored. Up to 20 events per character are retained for browsing.",
+      },
+      {
+        title: "Diff labels",
+        summary: "+ new, ~ changed, − removed.",
+        body: "See exactly what swapped when — e.g. Mageblood added, Headhunter removed — before opening the historic doll view.",
+      },
+      {
+        title: "Historic browsing",
+        summary: "Full app state at that moment.",
+        body: "Stat summary, doll/table layouts, and item detail reflect the selected snapshot. An amber banner marks historic view.",
+      },
+      {
+        title: "Back to current",
+        summary: "Return to live snapshot instantly.",
+        body: "Manual Refresh archives the previous state before fetching new GGG data.",
+      },
+    ],
+  },
+  {
+    id: "character-export",
+    label: "Character export",
+    icon: "image",
+    src: "/screenshots/OracleElevenG-detailed-epic.webp",
+    width: 2560,
+    height: 7294,
+    alt: "Detailed epic character export with full gear grid, mod tiers, roll bars, and stat summary",
+    kind: "annotated",
+    intro: "Epic detailed character PNG — every equipped item with tiers and roll quality (scroll to preview).",
+    figureClass: "max-h-[min(65vh,480px)] overflow-y-auto rounded-md border border-ink-600/60 bg-ink-900/40 lg:max-w-[380px]",
+    imageClass: "w-full",
+    callouts: [
+      {
+        title: "Detailed layout",
+        summary: "Full mod breakdown per item.",
+        body: "Same depth as the in-app table view — explicit tiers, roll bars, runes, and unique flavour text in one shareable image.",
+      },
+      {
+        title: "Epic theme",
+        summary: "Branded header with gear estimate.",
+        body: "Character name, level, class, league, stat summary row, and total gear value — ideal for build showcases on Discord or forums.",
+      },
+      {
+        title: "Simple layout",
+        summary: "Compact alternative available.",
+        body: "Choose Simple for a shorter overview card when you do not need every mod line.",
+      },
+      {
+        title: "Historic snapshots",
+        summary: "Export what you saw on a past date.",
+        body: "Select a timeline dot first — the PNG matches that historic gear state.",
+      },
     ],
   },
   {
     id: "rare-detail",
     label: "Rare item detail",
     icon: "chart",
-    src: "/screenshots/item-6ccf44f0-detail.png",
+    src: "/screenshots/item-6ccf44f0-detail.webp",
+    width: 800,
+    height: 2318,
     alt: "Rare weapon item detail export showing mod tiers and roll quality bars",
     kind: "annotated",
     tabAccent: "border-l-rarity-rare",
@@ -105,7 +191,9 @@ const slides: ShowcaseSlide[] = [
     id: "unique-detail",
     label: "Unique item detail",
     icon: "star",
-    src: "/screenshots/item-74538585-detail.png",
+    src: "/screenshots/item-74538585-detail.webp",
+    width: 800,
+    height: 1344,
     alt: "Unique item detail export with flavour text and explicit mods",
     kind: "annotated",
     tabAccent: "border-l-rarity-unique",
@@ -142,7 +230,9 @@ const slides: ShowcaseSlide[] = [
     id: "item-menu",
     label: "Item actions",
     icon: "menu",
-    src: "/screenshots/item_detail_menu.png",
+    src: "/screenshots/item_detail_menu.webp",
+    width: 355,
+    height: 418,
     alt: "Item detail action menu with share, export, trade search, and upgrade buttons",
     kind: "menu",
     intro: "Tools in the item detail pane — top to bottom as shown.",
@@ -188,7 +278,9 @@ const slides: ShowcaseSlide[] = [
     id: "stash",
     label: "Stash view",
     icon: "grid",
-    src: "/screenshots/stash.png",
+    src: "/screenshots/stash.webp",
+    width: 430,
+    height: 434,
     alt: "Stash tab icon grid with valuable item highlights",
     kind: "stash",
     intro: "Stash tab features in icon grid view (demo/dev until GGG stash scope ships).",
@@ -276,13 +368,22 @@ function slideHeading(slide: ShowcaseSlide): string {
               hidden={index !== 0}
             >
               <div class="card-pane grid gap-8 overflow-hidden p-4 sm:p-6 lg:grid-cols-[minmax(0,380px)_1fr] lg:items-start lg:gap-10">
-                <figure class="mx-auto w-full max-w-[380px] lg:mx-0 lg:sticky lg:top-24">
+                <figure
+                  class:list={[
+                    "mx-auto w-full lg:mx-0 lg:sticky lg:top-24",
+                    slide.kind === "wide" ? "max-w-3xl" : "max-w-[380px]",
+                    slide.figureClass,
+                  ]}
+                >
                   <img
                     src={slide.src}
                     alt={slide.alt}
-                    width="800"
-                    height="600"
-                    class="w-full rounded-md border border-ink-600/60"
+                    width={slide.width}
+                    height={slide.height}
+                    class:list={[
+                      "w-full rounded-md border border-ink-600/60",
+                      slide.imageClass,
+                    ]}
                     loading={index === 0 ? "eager" : "lazy"}
                   />
                 </figure>

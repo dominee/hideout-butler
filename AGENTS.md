@@ -20,15 +20,15 @@ Static marketing site for **PoE2 Hideout Butler** (main app: [PoE2-butler](https
 
 Single page ([`src/pages/index.astro`](src/pages/index.astro)) section order:
 
-1. Nav (sticky; favicon + links including How it works, Privacy)
+1. Nav (sticky; favicon + links including What's new, How it works, Privacy)
 2. Hero + StatusBanner (availability pills)
-3. HowItWorks → Features (grouped: Inspect / Trade / Share / Track) → Screenshots → UseCases
+3. **What's new** (recent highlights) → HowItWorks → Features → Screenshots → UseCases
 4. Privacy → Limitations → Roadmap → FAQ → CtaBand
 5. Footer + MobileStickyBar
 
 ## Assets
 
-Source screenshots in `screenshots/`; deployed copies in `public/screenshots/`.
+Source screenshots in `screenshots/` (PNG); deployed copies in `public/screenshots/` as **WebP** (`cwebp -q 82` for gallery; `-q 78` for very tall exports). Regenerate WebP after updating PNG sources.
 
 ## Mandatory copy
 
@@ -38,7 +38,7 @@ Footer must include verbatim GGG disclaimer:
 
 ## Messaging rules (2026-06)
 
-- **Live in production:** GGG OAuth2 with `account:profile` + `account:characters`; equipped gear via PoE2 `/character/poe2` API; paper doll and table views; activity diffs for character gear; runeforged item styling.
+- **Live in production:** GGG OAuth2 with `account:profile` + `account:characters`; equipped gear via PoE2 `/character/poe2` API; paper doll and table views; **gear snapshot timeline**; **character share links and image export**; activity diffs for character gear; runeforged item styling.
 - Do **not** imply live prod stash — GGG PoE2 stash OAuth scope is not available yet.
 - Stash feature card carries “Blocked on GGG API” badge; stash screenshots labelled demo/dev.
 - **`account:leagues` not granted** — league picker is inferred from character data; mention in Limitations / FAQ when relevant.

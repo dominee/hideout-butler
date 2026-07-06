@@ -85,15 +85,27 @@ const featureGroups: FeatureGroup[] = [
     title: "Share",
     features: [
       {
-        title: "Public share links",
+        title: "Public item share links",
         description:
           "World-readable item pages — create only for gear you are comfortable showing; revoke anytime.",
         icon: "link",
       },
       {
-        title: "Image export",
+        title: "Character share links",
+        description:
+          "Read-only pages for a whole character — simple or detailed view, current gear or a historic timeline snapshot.",
+        icon: "share",
+      },
+      {
+        title: "Item image export",
         description:
           "Discord-ready PNGs: compact card or full detail layout with tiers, ranges, and roll bars.",
+        icon: "image",
+      },
+      {
+        title: "Character image export",
+        description:
+          "Full-build PNGs — simple overview or epic detailed layout with stat summary and gear estimate.",
         icon: "image",
       },
     ],
@@ -101,6 +113,12 @@ const featureGroups: FeatureGroup[] = [
   {
     title: "Track",
     features: [
+      {
+        title: "Gear snapshot timeline",
+        description:
+          "Horizontal timeline of gear change events — browse historic doll/table views and item detail up to 20 snapshots back.",
+        icon: "activity",
+      },
       {
         title: "Activity log",
         description:

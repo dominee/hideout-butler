@@ -1,0 +1,190 @@
+---
+import ImageLightbox from "./ImageLightbox.astro";
+import Icon from "./Icon.astro";
+import type { IconName } from "../lib/icons";
+
+type Highlight = {
+  id: string;
+  date: string;
+  title: string;
+  summary: string;
+  bullets: string[];
+  icon: IconName;
+  image: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    /** Tailwind classes for the figure wrapper (e.g. tall scroll preview). */
+    figureClass?: string;
+    imageClass?: string;
+  };
+};
+
+const highlights: Highlight[] = [
+  {
+    id: "gear-timeline",
+    date: "July 2026",
+    title: "Gear snapshot timeline",
+    summary:
+      "See how your build evolved — browse historic equipped gear after each meaningful change.",
+    bullets: [
+      "Horizontal dot timeline above the stat summary — one dot per gear change event (up to 20 per character).",
+      "Each dot shows the date and a diff list: + new, ~ changed, − removed. Unchanged refreshes are skipped.",
+      "Click a dot to browse that snapshot: doll/table layouts, stat summary, and item detail as it was then.",
+      "Amber historic banner with Back to current; manual Refresh archives the previous state before fetching new data.",
+    ],
+    icon: "activity",
+    image: {
+      src: "/screenshots/Timeline.webp",
+      alt: "Gear snapshot timeline showing change dots, diff labels, and Back to current control",
+      width: 1318,
+      height: 298,
+      figureClass: "max-w-3xl",
+      imageClass: "w-full rounded-md border border-ink-600/60",
+    },
+  },
+  {
+    id: "character-share",
+    date: "July 2026",
+    title: "Character share links",
+    summary:
+      "Share a read-only view of your whole character — current gear or a historic timeline snapshot.",
+    bullets: [
+      "Share or export character in the header: create a world-readable link copied to your clipboard.",
+      "Simple view — compact gear overview; Detailed view — full mod breakdown per item, same as the in-app table.",
+      "Links can point at the current build or a historic snapshot you selected on the timeline.",
+      "Revoke anytime; creation is rate-limited. Treat links like public item shares — only share what you are comfortable showing.",
+    ],
+    icon: "link",
+    image: {
+      src: "/screenshots/Screenshot.webp",
+      alt: "Hideout Butler main screen with gear timeline, stat summary, paper doll, and Share or export character action",
+      width: 2498,
+      height: 1280,
+      figureClass: "max-w-xl lg:max-w-none",
+      imageClass: "w-full rounded-md border border-ink-600/60",
+    },
+  },
+  {
+    id: "character-export",
+    date: "July 2026",
+    title: "Character image export",
+    summary:
+      "Discord-ready PNGs of your full build — simple card or epic detailed layout with tiers and roll bars.",
+    bullets: [
+      "Export from the character share menu: Simple (compact) or Detailed (every mod with tier and roll quality).",
+      "Epic theme adds branded header, gear estimate, and stat summary — ideal for build showcases.",
+      "Historic snapshots export exactly as viewed — share how your character looked on a past date.",
+      "Client-side PNG generation; no server render queue on the small VM.",
+    ],
+    icon: "image",
+    image: {
+      src: "/screenshots/OracleElevenG-detailed-epic.webp",
+      alt: "Detailed epic character export showing full gear grid with mod tiers, roll bars, and stat summary",
+      width: 2560,
+      height: 7294,
+      figureClass: "max-h-[min(70vh,520px)] overflow-y-auto rounded-md border border-ink-600/60 bg-ink-900/40",
+      imageClass: "w-full",
+    },
+  },
+];
+---
+
+<section
+  id="whats-new"
+  class="section-divider border-b border-ink-800 bg-ink-900 py-16 sm:py-24"
+  aria-labelledby="whats-new-heading"
+>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <p
+        class="mb-3 inline-flex rounded-full border border-ember-500/30 bg-ember-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-ember-400"
+      >
+        What's new
+      </p>
+      <h2 id="whats-new-heading" class="section-heading">Recent highlights</h2>
+      <p class="section-subheading">
+        New in the app — gear history, character sharing, and full-build image
+        exports. Live in production after you sign in with GGG OAuth.
+      </p>
+    </div>
+
+    <ol class="mt-12 space-y-10">
+      {
+        highlights.map((item, index) => (
+          <li class="card-pane overflow-hidden">
+            <article
+              class:list={[
+                "grid gap-8 p-4 sm:p-6",
+                index % 2 === 0
+                  ? "lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-start"
+                  : "lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:items-start",
+              ]}
+            >
+              <div
+                class:list={[
+                  "min-w-0",
+                  index % 2 === 1 && "lg:order-2",
+                ]}
+              >
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="inline-flex rounded-lg bg-ember-500/10 p-2 text-ember-400">
+                    <Icon name={item.icon} class="h-5 w-5" />
+                  </span>
+                  <span class="rounded-full border border-ink-600 bg-ink-950/60 px-2.5 py-0.5 text-xs font-medium text-parchment-200/80">
+                    {item.date}
+                  </span>
+                </div>
+                <h3 class="mt-4 font-display text-xl font-semibold text-parchment-50 sm:text-2xl">
+                  {item.title}
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-parchment-100/90 sm:text-base">
+                  {item.summary}
+                </p>
+                <ul class="mt-5 space-y-2.5">
+                  {item.bullets.map((bullet) => (
+                    <li class="flex gap-2.5 text-sm leading-relaxed text-parchment-200/85">
+                      <span
+                        class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ember-400"
+                        aria-hidden="true"
+                      />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <figure
+                class:list={[
+                  "mx-auto w-full lg:mx-0 lg:sticky lg:top-24",
+                  index % 2 === 1 && "lg:order-1",
+                  item.image.figureClass,
+                ]}
+              >
+                <ImageLightbox
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  width={item.image.width}
+                  height={item.image.height}
+                >
+                  <img
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    width={item.image.width}
+                    height={item.image.height}
+                    class={item.image.imageClass}
+                    loading="lazy"
+                  />
+                </ImageLightbox>
+                <figcaption class="mt-2 text-center text-xs text-parchment-200/65">
+                  Click to enlarge
+                </figcaption>
+              </figure>
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
